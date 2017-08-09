@@ -1,0 +1,75 @@
+<html>
+<head>
+  <title>Friends</title>
+  <style type="text/css">
+
+  	#main{
+  		display: flex;
+  		flex-direction: column;
+  		align-items: center;
+  		margin: auto;
+
+  	}
+
+  	table{
+  		border-collapse: collapse;
+  		width: 250px;
+  	}
+
+  	td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+	}
+
+	tr:nth-child(even) {
+    background-color: gray;
+	}
+
+    form {
+    	width: 250px;
+    } 	
+
+    input[type='submit']{
+    	margin-top: 5px;
+    	margin-right: 5px;
+    }
+
+  </style>
+</head>
+<body>
+	<div id='main'>
+ 	<h1>Friends:</h1>
+ 	<table>
+ 	{%if all_friend:%}
+ 	<thead>
+ 	<tr>
+ 	<th>Name</th>
+ 	<th>Age</th>
+ 	<th colspan="2">Friends Since</th>
+ 	</tr>
+ 	</thead>
+ 	<tbody>
+	{%for friend in all_friend:%}
+	<tr>
+	<td>{{friend['first_name']}} {{friend['last_name']}}</td>
+	<td>{{friend['age']}}</td>
+	<td>{{friend.created_at.strftime('%b %d')}}</td>
+	<td>{{friend.created_at.strftime('%Y')}}</td>
+	</tr>
+	{%endfor%}
+	{%endif%}
+	</tbody>
+	</table>
+<!--   {% if one_friend: %}
+  <p>{{ one_friend.first_name}} {{one_friend.last_name}} is my only friend</p>
+  {%endif%} -->
+  <h2>Add a Friend</h2>
+  <form action='/friends' method='POST'>
+    <label for="name">Name:<input type="text" name="name" id="name"></label>
+    <label for="age">Age:<input type="text" name="age" id="age"></label>
+    <input type="submit" value="Add">
+  </form>
+  </div>
+</body>
+</html>

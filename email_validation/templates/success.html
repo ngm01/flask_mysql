@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Success!</title>
+	<style type="text/css">
+		.msg{
+		width: 400px;
+		height: 100px;
+		color: white;
+		font-size: 1em;
+		margin-bottom: 5px;
+		text-align: center;
+		background-color: green;
+	}
+
+	.msg p{
+		align-content: center;
+		padding-top: 15px;
+	}
+	</style>
+</head>
+<body>
+{%with messages = get_flashed_messages()%}
+{%for message in messages%}
+<div class='msg'>
+<p>{{message}}</p>
+</div>
+{%endfor%}
+{%endwith%}
+<h2>Email Addresses Entered:</h2>
+
+<table>
+{%for stuff in results%}
+<tr>
+<td>{{stuff.email}}</td>
+<td>{{stuff.created_at.strftime('%m/%d/%Y %I:%M %p')}}</td>
+<td><a href="/delete/{{stuff.email}}">Delete</a></td>
+</tr>
+{%endfor%}
+</table>
+<a href="/">GO BACK</a>
+</body>
+</html>

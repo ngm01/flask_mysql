@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Email Validation</title>
+	<style type="text/css">
+
+
+		
+	.msg{
+		width: 200px;
+		height: 100px;
+		color: white;
+		font-size: 2em;
+		margin-bottom: 5px;
+		text-align: center;
+	}
+
+	.msg p{
+		align-content: center;
+		padding-top: 15px;
+	}
+
+	#error{
+		background-color: red;
+	}
+
+	#duplicate{
+		background-color: orange;
+	}
+
+	</style>
+</head>
+<body>
+{%with messages = get_flashed_messages()%}
+{%if messages%}
+{%for message in messages%}
+{%if message == 'Email already in database.'%}
+<div class='msg' id="duplicate">
+<p>{{message}}</p>
+</div>
+{%else%}
+<div class='msg' id="error">
+<p>{{message}}</p>
+</div>
+{%endif%}
+{%endfor%}
+{%endif%}
+{%endwith%}
+<form action="/validate" method="post">
+	<label for="email">Email Address: </label>
+	<input type="text" name="email">
+	<input type="submit" value="Submit">
+</form>
+</body>
+</html>

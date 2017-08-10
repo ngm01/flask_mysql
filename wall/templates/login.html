@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Wall - Please Log In</title>
+</head>
+<body>
+
+<div id="login">
+<h2>Login:</h2>
+<form action='/login' method='post'>
+	<label for='login_email'>Email:</label>
+	<input type="text" name="login_email">
+	<label for='login_pword'>Password:</label>
+	<input type="password" name="login_pword">
+	<input type="submit" name="login_submit" value="Login">
+</form>
+</div>
+
+<div id="register">
+<h2>Register:</h2>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div id="msgs">
+{% for message in messages %}
+<p>{{message}}</p>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<form action='/register' method='post'>
+	<label for='reg_fname'>First Name:</label>
+	<input type="text" name="reg_fname">
+	<label for='reg_lname'>Last Name:</label>
+	<input type="text" name="reg_lname">
+	<label for='reg_email'>Email:</label>
+	<input type="text" name="reg_email">
+	<label for='reg_pword'>Password:</label>
+	<input type="password" name="reg_pword">
+	<label for='confirm_pword'>Confirm Password:</label>
+	<input type="password" name="confirm_pword">
+	<input type="submit" name="reg_submit" value="Register">
+</form>
+</div>
+</body>
+</html>

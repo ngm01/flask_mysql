@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Wall</title>
+</head>
+<style type="text/css">
+
+*{
+	/*outline: 1px solid red;*/
+}
+	
+#header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#post_msg{
+	width: 400px;
+}
+
+#msg_box{
+	width: 400px;
+	height: 75px;
+}
+
+#comment_box{
+	width: 300px;
+	height: 50px;
+}
+
+.comment p{
+	font-size: 75%;
+}
+
+</style>
+<body>
+
+<div id='header'>
+<h1>CodingDojo Wall</h1>
+<h3>Welcome, {{user['first_name']}}!</h3>
+<a href="/logout">log off</a>
+</div>
+
+<div id='post_msg'>
+<h2>Post a message</h2>
+<form action='/post_message' method='post'>
+	<textarea id="msg_box" name='msg_box'></textarea>
+	<input type="submit" name="msg_submit" value="Post a message">
+</form>
+</div>
+
+<!-- Check the database for messages. Display the messages and comments, along with the 'post comments' form -->
+<div id="messages">
+	{%for post in posts%}
+	<div class="msg">
+		<h4>{{post['first_name']}} {{post['last_name']}} left a message at {{post.created_at}}</h4>
+		<p>{{post['message']}}</p>
+		{%for comment in comments%}
+			{%if post['id'] == comment.message_id %}
+				<div class='comment'>
+				<h5>{{comment['first_name']}} {{comment['last_name']}} left a comment at {{comment['created_at']}}</h5>
+				<p>{{comment['comment']}}</p>
+				</div>
+			{%endif%}
+		{%endfor%}
+			<form action='/post_comment/{{post.id}}' method='post'>
+				<textarea id="comment_box" name='comment_box'></textarea>
+				<input type="submit" name="comment_submit" value="Post a comment">
+			</form>
+	</div>
+	{%endfor%}
+</div>
+
+</body>
+</html>
